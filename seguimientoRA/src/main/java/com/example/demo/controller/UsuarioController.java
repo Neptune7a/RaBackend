@@ -33,18 +33,33 @@ public class UsuarioController {
 	        return usuarioRepository.findAll();
 	    }
 
-	    @PostMapping("/registro")
-	    public Usuario createUsuario(@RequestBody Usuario usuario) {
+	    @PostMapping("/registro/estudiante")
+	    public Usuario createUsuarioE(@RequestBody Usuario usuario) { //para registrar un estudiante para presentar la prueba
 	    	 	String to = usuario.getCorreo();
-		        String subject = "Confirmación de Registro";
+		        String subject = "Seguimiento de aprendizaje UFPS";
 		        String text = "Estimado " + usuario.getNombre() + ",\n\n" +
-		                      "Gracias por registrarse. Su cuenta ha sido creada exitosamente.\n\n" +
+		                      "Ha sido elegido para participar en nuestra prueba para el seguimiento\n\n" +
+		                      "de los resultados de aprendizaje,\n" +
 		                      "Saludos,\n" +
-		                      "El equipo de soporte.";
+		                      "Programa de Ingeniería en Sistemas, universidad Francisco de Paula Santander";
 		        emailService.sendEmail(to, subject, text);
 	    	return usuarioRepository.save(usuario);
 	        
-	    }	    
+	    }
+	    
+	    @PostMapping("/registro/jurado")
+	    public Usuario createUsuarioJ(@RequestBody Usuario usuario) { //para registrar un jurado y calificar la prueba
+	    	 	String to = usuario.getCorreo();
+		        String subject = "Jurado prueba seguimiento de aprendizaje";
+		        String text = "Estimado " + usuario.getNombre() + ",\n\n" +
+		                      "Ha sido designado correctamente como jurado en las pruebas\n\n" +
+		                      "de los resultados de aprendizaje,\n" +
+		                      "Saludos,\n" +
+		                      "Programa de Ingeniería en Sistemas, universidad Francisco de Paula Santander";
+		        emailService.sendEmail(to, subject, text);
+	    	return usuarioRepository.save(usuario);
+	        
+	    }	  
 
 	    @GetMapping("/{id}")
 	    public Usuario getUsuarioById(@PathVariable Long id) {

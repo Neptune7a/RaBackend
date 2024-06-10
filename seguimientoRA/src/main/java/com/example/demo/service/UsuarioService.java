@@ -19,10 +19,9 @@ public class UsuarioService {
 	            MimeMessage mimeMessage = mailSender.createMimeMessage();
 	            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
 
-	            mimeMessage.setContent(text, "Bienvenido a la plataforma de seguimiento de los RA");
+	            mimeMessage.setText(text);
 	            helper.setTo(to);
 	            helper.setSubject(subject);
-
 	            mailSender.send(mimeMessage);
 	            System.out.println("Correo enviado exitosamente.");
 	        } catch (Exception e) {
